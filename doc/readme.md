@@ -35,6 +35,7 @@ return [
 			'nazwa-aliasu' => Controller\NazwaController::class,
 		]
 	]
+//...
 ]
 ```
 
