@@ -33,8 +33,8 @@ return [
 		        //...
 		        // nazwa aliasu (example.com/module/nazwa-aliasu
 	            'nazwa-aliasu' => Controller\NazwaController::class,
-        ]
-	]
+	        ]
+		]
 ]
 ```
 
