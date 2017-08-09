@@ -43,24 +43,33 @@ return [
 
 Dodanie pliku Controllera w katalogu
 
-	module/
-	    NazwaModułu/
-		    src/
-		        Controller/
-		            NowyController.php	
+	/module
+	    /<Module>
+		    /src
+		        /<Controller>
+		            /NowyController.php	
 					
 				
 
 Dodanie fabryki Controllera w katalogu
 
-	 module/
-	    <NazwaModułu>/
-	        src/
-	            Controller/
-	                Factory/
-	                    NowyControllerFactory.php	
+	 /module
+	    /<Module>
+	        /src
+	            /<Controller>
+	                /Factory
+	                    /NowyControllerFactory.php	
 					
 
+Połączenie Controllera z widokiem
+---------------------------------
+
+Domyślnie Controller zwraca widok powiązany modelem MVC z controllerem. 
+Czyli indexAction zwraca widok view/*Modul*/*Controller*/index.phtml.
+
+W celu przekazania do niego parametru w akcji zwracamy tablicę:
+
+Plik IndexController.php
 
 
 Dodatek A Nowości PHP
