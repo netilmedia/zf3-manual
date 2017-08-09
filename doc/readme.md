@@ -27,11 +27,11 @@ return [
 ['controllers' => [
 	'factories' => [
 	//...
-	            Controller\NazwaController::class => Controller\Factory\NazwaControllerFactory::class,
-	        ],
-	        'aliases' => [
-				//...
-				// nazwa aliasu (example.com/module/nazwa-aliasu
+	Controller\NazwaController::class => Controller\Factory\NazwaControllerFactory::class,
+	],
+	'aliases' => [
+		//...
+		// nazwa aliasu (example.com/module/nazwa-aliasu
 				'nazwa-aliasu' => Controller\NazwaController::class,
 	        ]
 	]
