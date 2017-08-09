@@ -24,9 +24,9 @@ Dodanie fabryki i aliasu w pliku <M>/config/module.config.php
 ```php
 return [
 //...
-	['controllers' => [
-		'factories' => [
-	        //...
+['controllers' => [
+'factories' => [
+	//...
 	            Controller\NazwaController::class => Controller\Factory\NazwaControllerFactory::class,
 	        ],
 	        'aliases' => [
