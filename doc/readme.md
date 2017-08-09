@@ -56,8 +56,8 @@ Dodanie fabryki Controllera w katalogu
 		 <NazwaModułu>/
 			 src/			 
 				 Controller/
-					 Factory/
-						 NowyControllerFactory.php	
+					Factory/
+						NowyControllerFactory.php	
 					
 
 
