@@ -19,8 +19,7 @@ Aktualizacja Modułu
 Dodanie nowego Controllera
 --------------------------
 
- 1. Dodanie fabryki i aliasu w pliku <M>/config/module.config.php
-	 Klucz tablicy
+Dodanie fabryki i aliasu w pliku <M>/config/module.config.php
 
 ```php
 return [
@@ -31,17 +30,36 @@ return [
             Controller\NazwaController::class => Controller\Factory\NazwaControllerFactory::class,
         ],
         'aliases' => [
-            'ticket-listing' => Controller\TicketListingController::class,
-            'ticket-create' => Controller\TicketCreateController::class,
-            'ticket-details' => Controller\TicketDetailsController::class,
+        //...
+        // nazwa aliasu (example.com/module/nazwa-aliasu
+            'nazwa-aliasu' => Controller\NazwaController::class,
         ]
 	]
 ```
 
-	 Klucz tablicy controllers/aliases
-    Dodanie pliku Controllera w katalogu <M>/Controller Dodanie fabryki
-    Controllera w katalogu <M>/Controlller/Factory Dodanie katalogu
-    widoków do katalogu <M>/view/<M>/nazwa_controllera
+  
+
+Dodanie pliku Controllera w katalogu
+
+	module/
+		NazwaModułu/
+			src/
+				Controller/
+					NowyController.php	
+					
+				
+
+Dodanie fabryki Controllera w katalogu
+
+	 module/
+		 <NazwaModułu>/
+			 src/			 
+				 Controller/
+					 Factory/
+						 NowyControllerFactory.php	
+					
+
+
 
 Dodatek A Nowości PHP
 =====================
