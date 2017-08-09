@@ -27,7 +27,7 @@ return [
 	['controllers' => [
 		'factories' => [
 	        //...
-            Controller\NazwaController::class => Controller\Factory\NazwaControllerFactory::class,
+	            Controller\NazwaController::class => Controller\Factory\NazwaControllerFactory::class,
 	        ],
 	        'aliases' => [
 		        //...
