@@ -32,8 +32,8 @@ return [
 	'aliases' => [
 		//...
 		// nazwa aliasu (example.com/module/nazwa-aliasu
-				'nazwa-aliasu' => Controller\NazwaController::class,
-	        ]
+		'nazwa-aliasu' => Controller\NazwaController::class,
+		]
 	]
 ]
 ```
