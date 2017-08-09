@@ -46,7 +46,7 @@ Dodanie pliku Controllera w katalogu
 	module/
 		NazwaModułu/
 			src/
-			Controller/
+				Controller/
 					NowyController.php	
 					
 				
