@@ -54,11 +54,11 @@ Dodanie pliku Controllera w katalogu
 Dodanie fabryki Controllera w katalogu
 
 	 module/
-		 <NazwaModułu>/
-			 src/			 
-				 Controller/
-					Factory/
-						NowyControllerFactory.php	
+	    <NazwaModułu>/
+	        src/
+	            Controller/
+	                Factory/
+	                    NowyControllerFactory.php	
 					
 
 
