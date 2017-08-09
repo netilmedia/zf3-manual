@@ -69,7 +69,21 @@ Czyli indexAction zwraca widok view/*Modul*/*Controller*/index.phtml.
 
 W celu przekazania do niego parametru w akcji zwracamy tablicę:
 
-Plik IndexController.php
+
+```php
+//IndexController.php
+namespace Application\Controller;
+//potrzebne jedynie w przypadku użycia new ViewModel() w akcji
+use Zend\View\Model\ViewModel;
+	
+class IndexController extends AbstractControllerAction {
+
+	public function indexAction() {
+		$foo = 'test';
+		return ['foo' => $foo];
+	}
+}
+```
 
 
 Dodatek A Nowości PHP
