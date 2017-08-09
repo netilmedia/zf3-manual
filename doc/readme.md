@@ -44,10 +44,10 @@ return [
 Dodanie pliku Controllera w katalogu
 
 	module/
-		NazwaModułu/
-			src/
-				Controller/
-					NowyController.php	
+	    NazwaModułu/
+		    src/
+			    Controller/
+				    NowyController.php	
 					
 				
 
