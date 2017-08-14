@@ -140,7 +140,7 @@ public function indexAction() {
 }
 
 public function testAction() {
-	// pobieranie wartości parametru /?parametr=wartosc
+    // pobieranie wartości parametru /?parametr=wartosc
     $wartosc = $this->params()->fromQuery('parametr');
     return ['parametr' => $wartosc];
 }
@@ -149,7 +149,11 @@ public function testAction() {
 Dodatek A Nowości PHP
 =====================
 
-**::class** - jest to specjalna stała klasy, której wartością jest nazwa klasy z całą przestrzenią nazw np. IndexController::class zwraca: \Application\Controller\IndexController
+**::class** - jest to specjalna stała klasy, której wartością jest nazwa klasy z całą przestrzenią nazw np.  
+```php
+echo IndexController::class
+// wyświetli \Application\Controller\IndexController
+```
 
 
 ----
