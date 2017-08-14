@@ -33,9 +33,9 @@ return [
             Controller\NazwaController::class => Controller\Factory\NazwaControllerFactory::class,
         ],
         'aliases' => [
-        //...
-        // nazwa aliasu (example.com/module/nazwa-aliasu
-        'nazwa-aliasu' => Controller\NazwaController::class,
+            //...
+            // nazwa aliasu (example.com/module/nazwa-aliasu
+            'nazwa-aliasu' => Controller\NazwaController::class,
         ]
     ]
 //...
@@ -48,9 +48,9 @@ Dodanie pliku kontrolera w katalogu
 
 	/module
 	    /<NazwaModułu>
-		    /src
-		        /<NazwaKontrolera>
-		            /NowyController.php	
+	        /src
+	            /<NazwaKontrolera>
+	                /NowyController.php	
 					
 				
 
