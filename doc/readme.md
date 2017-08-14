@@ -108,7 +108,7 @@ class IndexController extends AbstractControllerAction {
 
 Posiadając obiekt ViewModel możemy przekazać do niego parametry na kilka sposobów. Jednym z nich jest przekazanie tablicy do konstruktora obiektu tak jak w przykładzie powyżej. Kolejnym sposobem jest użycie metod:
 
-```
+```php
 public function indexAction() {
 
     $viewModel = new ViewModel();
@@ -144,6 +144,13 @@ public function testAction() {
     $wartosc = $this->params()->fromQuery('parametr');
     return ['parametr' => $wartosc];
 }
+```
+
+W widoku możemy się wtedy odwołać w następujący sposób:
+
+```php
+// plik view/application/index/index.phtml
+echo $this->testView;
 ```
 
 Dodatek A Nowości PHP
