@@ -2,25 +2,48 @@ Spis treści:
 
 [TOC]
 
-QuickStart
-==========
-
-Aktualizacja Modułu
--------------------
- 1. Pobranie katalogu modułu
- 2. Pobranie pliku /config/modules.config.php i / modules.acl.roles.php
- 3. Pobranie /composer.json
- 4. Uruchomienie komendy
-
-```
-> composer dump-autoload
-```
-
 Kontroler
-===
+=
+
+Zgodnie z wzorcem [MVC](https://pl.wikipedia.org/wiki/Model-View-Controller) kontroler *(Controller)* łączy model *(Model)* z widokiem *(View)*. Najprościej mówiąc jeżeli użytkownik wpisuje adres:
+```
+www.example.com/application/test/akcja
+```
+ uruchamia w ten sposób kontroler **Test** *(TestController)*, który następnie pobiera potrzebne modele (np. produkt w sklepie) i przekazuje do zwracanego widoku.
+
+Przykład wywołania adresu sklepu:
+
+```
+www.example.com/sklep/produkt/widok/id/1
+```
+
+Uruchamia kontroler **produkt** *(ProductController)* a następnie akcję kontrolera **widok** *(viewAction)*. Akcja pobiera wartość parametru **id**, następnie pobiera produkt o takim id i przekazuje do widoku.
+
+Jak to wygląda w ZF?
+
+```php
+<?php
+// Plik kontrolera ProductController.php
+
+// Klasa kontrolera
+class ProductController extend AbstractControllerAction {
+    
+    // akcja viewAction
+    public function viewAction() {
+        // pobranie id z adresu
+        $id = (int)$this->params()->fromRoute('id');
+
+        // pobranie produktu (modelu) np. z tabeli w bazie danych
+        $product = $this->productDbTable->getProductById($id);
+
+        // zwrócenie widoku z przekazanym obiektem $product
+		return ['product' => $product];
+    }
+}
+```
 
 Dodanie nowego kontrolera
---------------------------
+-
 
 Dodanie fabryki i aliasu w pliku /module/*NazwaModułu*/config/module.config.php
 
@@ -44,31 +67,43 @@ return [
 
   
 
-Dodanie pliku kontrolera w katalogu
+Dodanie pliku kontrolera *TestController.php* w katalogu
 
-	/module
-	    /<NazwaModułu>
-	        /src
-	            /<NazwaKontrolera>
-	                /NowyController.php	
-					
-				
+```
+/module
+    /Application
+        /src
+            /Controller
+```
 
-Dodanie fabryki kontrolera w katalogu
+```php
+// plik TestController.php
+<?php
+namespace Application\Controller;
 
-	 /module
-	    /<NazwaModułu>
-	        /src
-	            /<NazwaKontrolera>
-	                /Factory
-	                    /NowyControllerFactory.php	
-					
+class TestController extends AbstractControllerAction {
+
+    public function indexAction() {
+        
+    }
+}
+```
+
+Dodanie pliku fabryki kontrolera *TestControllerFactory.php* w katalogu
+
+```
+/module
+    /Application
+        /src
+            /Controller
+                /Factory	
+```					
 
 Połączenie kontrolera z widokiem
 ---------------------------------
 
 Domyślnie kontroler zwraca powiązany z nim widok np. 
-indexAction zwraca widok view/*NazwaModułu*/*NazwaKontrolera*/index.phtml
+indexAction zwraca widok *view/Application/index/index.phtml*
 
 W celu przekazania do niego parametru w akcji zwracamy tablicę:
 
@@ -169,6 +204,22 @@ Tworzymy plik *TestForm.php* w katalogu:
         /src
             /Form
 ```
+
+Moduły
+=
+
+Aktualizacja Modułu
+-------------------
+ 1. Pobranie katalogu modułu
+ 2. Pobranie pliku /config/modules.config.php i / modules.acl.roles.php
+ 3. Pobranie /composer.json
+ 4. Uruchomienie komendy
+
+```
+> composer dump-autoload
+```
+
+
 
 Dodatek A: Nowości PHP
 =====================
