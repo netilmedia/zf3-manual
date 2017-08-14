@@ -153,13 +153,22 @@ W widoku możemy się wtedy odwołać w następujący sposób:
 echo $this->testView;
 ```
 
-Korzystanie z komponentu Zend\Form
+Korzystanie z modułu Zend\Form
 =
 
+Moduł Zend\Form daje możliwość zdefiniowania pól formularza, dodanie do nich filtrów i walidacji.
 
+Definiowanie formularza
+-
 
+Tworzymy plik *TestForm.php* w katalogu:
 
-
+```
+/module
+    /Application
+        /src
+            /Form
+```
 
 Dodatek A: Nowości PHP
 =====================
