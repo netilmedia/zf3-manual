@@ -153,6 +153,14 @@ W widoku możemy się wtedy odwołać w następujący sposób:
 echo $this->testView;
 ```
 
+Korzystanie z komponentu Zend\Form
+=
+
+
+
+
+
+
 Dodatek A: Nowości PHP
 =====================
 
