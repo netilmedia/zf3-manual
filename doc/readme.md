@@ -27,17 +27,17 @@ Dodanie fabryki i aliasu w pliku /module/*NazwaModułu*/config/module.config.php
 ```php
 return [
 //...
-	['controllers' => [
-		'factories' => [
-			//...
-			Controller\NazwaController::class => Controller\Factory\NazwaControllerFactory::class,
-		],
-		'aliases' => [
-			//...
-			// nazwa aliasu (example.com/module/nazwa-aliasu
-			'nazwa-aliasu' => Controller\NazwaController::class,
-		]
-	]
+    ['controllers' => [
+        'factories' => [
+            //...
+            Controller\NazwaController::class => Controller\Factory\NazwaControllerFactory::class,
+        ],
+        'aliases' => [
+        //...
+        // nazwa aliasu (example.com/module/nazwa-aliasu
+        'nazwa-aliasu' => Controller\NazwaController::class,
+        ]
+    ]
 //...
 ]
 ```
@@ -54,7 +54,7 @@ Dodanie pliku kontrolera w katalogu
 					
 				
 
-Dodanie fabryki Controllera w katalogu
+Dodanie fabryki kontrolera w katalogu
 
 	 /module
 	    /<NazwaModułu>
@@ -153,7 +153,7 @@ W widoku możemy się wtedy odwołać w następujący sposób:
 echo $this->testView;
 ```
 
-Dodatek A Nowości PHP
+Dodatek A: Nowości PHP
 =====================
 
 **::class** - jest to specjalna stała klasy, której wartością jest nazwa klasy z całą przestrzenią nazw np.  
