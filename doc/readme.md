@@ -79,13 +79,13 @@ namespace Application\Controller;
 	
 class IndexController extends AbstractControllerAction {
 
-	public function indexAction() {
-		$wartosc = 'test';
-		// tak zwrócona tablica powoduje zamianę jej
-		// przez klasę AbstractControllerAction na
-		// obiekt ViewModel(['parametr' => $wartosc']
-		return ['parametr' => $wartosc];
-	}
+    public function indexAction() {
+        $wartosc = 'test';
+        // tak zwrócona tablica powoduje zamianę jej
+        // przez klasę AbstractControllerAction na
+        // obiekt ViewModel(['parametr' => $wartosc']
+        return ['parametr' => $wartosc];
+    }
 }
 ```
 
@@ -129,8 +129,7 @@ Przekazanie widoku jednej akcji do widoku drugiej:
 
 ```php
 public function indexAction() {
-    $testView = $this->forward()
-        ->dispatch(IndexController::class, [
+    $testView = $this->forward()->dispatch(IndexController::class, [
             'action => 'test'
         ]);
     
