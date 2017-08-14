@@ -100,7 +100,7 @@ class IndexController extends AbstractControllerAction {
 
     public function indexAction() {
         return new ViewModel([
-	        'parametr' => $wartosc
+            'parametr' => $wartosc
         ]);
     }
 }
@@ -130,8 +130,8 @@ Przekazanie widoku jednej akcji do widoku drugiej:
 ```php
 public function indexAction() {
     $testView = $this->forward()->dispatch(IndexController::class, [
-            'action => 'test'
-        ]);
+        'action => 'test'
+    ]);
     
     $viewModel = new ViewModel();
     $viewModel->addChild($testView, 'testView');
