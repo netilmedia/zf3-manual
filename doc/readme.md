@@ -16,10 +16,13 @@ Aktualizacja Modułu
 > composer dump-autoload
 ```
 
-Dodanie nowego Controllera
+Kontroler
+===
+
+Dodanie nowego kontrolera
 --------------------------
 
-Dodanie fabryki i aliasu w pliku <M>/config/module.config.php
+Dodanie fabryki i aliasu w pliku /module/*NazwaModułu*/config/module.config.php
 
 ```php
 return [
@@ -41,12 +44,12 @@ return [
 
   
 
-Dodanie pliku Controllera w katalogu
+Dodanie pliku kontrolera w katalogu
 
 	/module
-	    /<Module>
+	    /<NazwaModułu>
 		    /src
-		        /<Controller>
+		        /<NazwaKontrolera>
 		            /NowyController.php	
 					
 				
@@ -54,18 +57,18 @@ Dodanie pliku Controllera w katalogu
 Dodanie fabryki Controllera w katalogu
 
 	 /module
-	    /<Module>
+	    /<NazwaModułu>
 	        /src
-	            /<Controller>
+	            /<NazwaKontrolera>
 	                /Factory
 	                    /NowyControllerFactory.php	
 					
 
-Połączenie Controllera z widokiem
+Połączenie kontrolera z widokiem
 ---------------------------------
 
-Domyślnie Controller zwraca widok powiązany modelem MVC z controllerem. 
-Czyli indexAction zwraca widok view/*Modul*/*Controller*/index.phtml.
+Domyślnie kontroler zwraca powiązany z nim widok np. 
+indexAction zwraca widok view/*NazwaModułu*/*NazwaKontrolera*/index.phtml
 
 W celu przekazania do niego parametru w akcji zwracamy tablicę:
 
@@ -73,18 +76,76 @@ W celu przekazania do niego parametru w akcji zwracamy tablicę:
 ```php
 //IndexController.php
 namespace Application\Controller;
-//potrzebne jedynie w przypadku użycia new ViewModel() w akcji
-use Zend\View\Model\ViewModel;
 	
 class IndexController extends AbstractControllerAction {
 
 	public function indexAction() {
-		$foo = 'test';
-		return ['foo' => $foo];
+		$wartosc = 'test';
+		// tak zwrócona tablica powoduje zamianę jej
+		// przez klasę AbstractControllerAction na
+		// obiekt ViewModel(['parametr' => $wartosc']
+		return ['parametr' => $wartosc];
 	}
 }
 ```
 
+Ten sam efekt uzyskamy poprzez zwrócenie obiektu tak jak robi to klasa AbstractControllerAction:
+
+```php
+namespace Application\Controller;
+//potrzebne jedynie w przypadku użycia new ViewModel() w akcji
+use Zend\View\Model\ViewModel;
+
+class IndexController extends AbstractControllerAction {
+
+    public function indexAction() {
+        return new ViewModel([
+	        'parametr' => $wartosc
+        ]);
+    }
+}
+```
+
+Posiadając obiekt ViewModel możemy przekazać do niego parametry na kilka sposobów. Jednym z nich jest przekazanie tablicy do konstruktora obiektu tak jak w przykładzie powyżej. Kolejnym sposobem jest użycie metod:
+
+```
+public function indexAction() {
+
+    $viewModel = new ViewModel();
+    // przekazanie jednego parametru
+    $viewModel->setVariable('parametr', 'wartosc');
+    
+    // lub przekazanie wielu parametrów w tablicy
+    $viewModel->setVariables([
+        'parametr1' => 'wartosc1',
+        'parametr2' => 'wartosc2'
+    ]);
+
+    return $viewModel;
+}
+```
+
+Przekazanie widoku jednej akcji do widoku drugiej:
+
+```php
+public function indexAction() {
+    $testView = $this->forward()
+        ->dispatch(IndexController::class, [
+            'action => 'test'
+        ]);
+    
+    $viewModel = new ViewModel();
+    $viewModel->addChild($testView, 'testView');
+    
+    return $viewModel;
+}
+
+public function testAction() {
+	// pobieranie wartości parametru /?parametr=wartosc
+    $wartosc = $this->params()->fromQuery('parametr');
+    return ['parametr' => $wartosc];
+}
+```
 
 Dodatek A Nowości PHP
 =====================
