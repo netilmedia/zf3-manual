@@ -270,6 +270,15 @@ class UserForm extends Form { // extends Zend\Form\Form
                 'placeholder' => 'Nazwa użytkownika'
             ]
         ]);
+
+        // dodajemy pole tekstowe "hasło"
+        $this->add([
+            'name' => 'password',
+            'type' => 'password',
+            'options' => [
+                'label' => 'Hasło'
+            ]
+        ]);
         
         // dodajemy guzik
         $this->add([
@@ -316,12 +325,16 @@ $form = &$this->form;
 // wywołujemy metodę prepare() przed użyciem widoku
 $form->prepare();
 
-// pobieramy obiekt pola username
+// pobieramy obiekt pola "username"
 // i dodajemy do niego atrybut class="form-control"
 $username = $form->get('username')
             ->setAttribute('class', 'form-control');
 
-// pobieramy obiekt guzika submit
+// pobieramy obiekt pola "password"
+$password = $form->get('password')
+            ->setAttribute('class', 'form-control');
+
+// pobieramy obiekt guzika "submit"
 $submit = $form->get('submit')
             ->setAttribute('class', 'btn btn-primary');
 ?>
@@ -329,12 +342,28 @@ $submit = $form->get('submit')
     <?php echo $this->form()->openTag($form); ?>
     
     <div class="form-group">
-        <?php echo $this->formLabel($username); // wyświetlamy etykietę pola username ?>
-        <?php echo $this->formElement($username); // wyświetlamy pole username ?>
+        <?php echo $this->formLabel($username); // wyświetlamy etykietę pola "username" ?>
+        <?php echo $this->formElement($username); // wyświetlamy pole "username" ?>
     </div>
+    <div class="form-group">
+        <?php echo $this->formRow($password); // wyświetlamy etykietę i pole korzystając z formRow ?>
+    </div> 
     <?php echo $this->formElement($submit); ?>
     
     <?php echo $this->form()->closeTag($form); ?>
+</div><!-- end .container -->
+```
+Powyższy przykład wygeneruje kod HTML:
+
+```html
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label>Nazwa użytkownika</label>
+            <input type="text" class="form-control" placeholder="nazwa użytkownika">
+        </div>
+        <button type="submit">Zarejestruj się</button>
+    </form>
 </div><!-- end .container -->
 ```
 
