@@ -362,6 +362,10 @@ Powyższy przykład wygeneruje kod HTML:
             <label>Nazwa użytkownika</label>
             <input type="text" class="form-control" placeholder="nazwa użytkownika">
         </div>
+        <div class="form-group">
+            <label>hasło</label>
+            <input type="password" class="form-control">
+        </div>        
         <button type="submit">Zarejestruj się</button>
     </form>
 </div><!-- end .container -->
