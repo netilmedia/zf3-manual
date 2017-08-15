@@ -84,7 +84,7 @@ return [
         'aliases' => [
             //...
             // nazwa aliasu (example.com/application/user
-            'user' => Controller\NazwaController::class,
+            'user' => Controller\UserController::class,
         ]
     ]
 //...
@@ -295,8 +295,8 @@ namespace Application/Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Application\Form\UserForm;
 
-class UserController extends AbstractActionController {
-    
+class UserController extends AbstractActionController {    
+
     public function formAction() {
         
         $form = new UserForm();
@@ -315,8 +315,13 @@ Tworzymy plik widoku w katalogu */module/Application/view/application/user/form.
 // przekazujemy do lokalnej zmiennej $form referencje do
 // obiektu $this->form 
 $form = &$this->form;
-// wywołujemy metodę prepare() przed użyciem widoku
-$form->prepare();
+// ustawiamy atrybut action na /application/user/create
+// i wywołujemy metodę prepare() przed użyciem formularza
+// w widoku (wymagane)
+$form->setAttribute('action', $this->url('application', [
+        'controller' => 'user',
+        'action' => 'create'
+    ]))->prepare();
 
 // pobieramy obiekt pola "username"
 // i dodajemy do niego atrybut class="form-control"
@@ -362,6 +367,48 @@ Powyższy przykład wygeneruje kod HTML:
         <button type="submit">Zarejestruj się</button>
     </form>
 </div><!-- end .container -->
+```
+
+Obsługa danych z formularza
+------
+
+W celu obsłużenia danych wysłanych przez nasz formularz wracamy do kontrolera i dodajemy akcję *createAction()*.
+
+```php
+// UserController.php
+
+public function createAction() {
+
+    $form = new UserForm();
+
+    if ($this->getRequest()->isPost()) {
+        //
+        $data = $this->params()->fromPost();
+        
+        $form->setData($data);
+        
+        if ($form->isValid()) {
+            // Przekazujemy dane z formularza
+            // do usługi "userManager", które w przypadku
+            // pomyślnego dodania do bazy zwróci
+            // obiekt $user (encję User);
+            
+            $user = $this->userManager->create($data);
+            // wyświetlamy id dodanego użytkownika    
+            echo $user->getId();
+            
+        } else {
+            // w przypadku błędnie wypełnionego formularza
+            // wyświetlamy błędy na ekran dla celów przykładu
+            var_dump($form->getMessages());
+        }
+    }    
+
+    $viewModel = new ViewModel();
+    $viewModel->addChild($userForm, 'form');
+    return $viewModel;
+}
+
 ```
 
 Model
