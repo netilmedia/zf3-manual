@@ -70,7 +70,7 @@ $users = $this->em->getRepository(User::class)
         ->findByPassword('tajne_haslo');
 ```
 
-Jak widzimy na powyższym przykładzie możemy wywołać metodę *findBy[nazwaAtrybutuEncji]()* i *findOneBy[nazwaAtrybutuEncji]()*
+Jak widzimy na powyższym przykładzie możemy wywołać metodę *findBy\[nazwaAtrybutuEncji\]()* i *findOneBy\[nazwaAtrybutuEncji\]()*
 
 Metody te obsługiwane są poprzez wywołanie metody *__call()* i zamieniane na wcześniej przedstawione metody *findBy()* i *findOneBy()*, więc możemy do nich przekazać dodatkowe argumenty np. *$orderBy*. 
 
