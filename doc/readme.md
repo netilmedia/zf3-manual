@@ -366,6 +366,11 @@ Powyższy przykład wygeneruje kod HTML:
 
 Encje
 ======
+
+Wracając do wzorca MVC mamy już nasz kontroler ( **C** ontroller) i widok ( **V** iew). Nadszedł więc czas na nasz model ( **M** odel).
+
+Korzystając z biblioteki Doctrine tworzymy w tym celu encję **User**.
+
 Dodanie pliku */Application/src/Entity/User.php*
 
 ```php
@@ -426,6 +431,35 @@ class User {
 
 }
 ```
+
+Doctrine używa adnotacji (Annotations), czyli specjalnych komentarzy w celu zinterpretowania konfiguracji encji.
+W naszej encji użyliśmy następujących adnotacji:
+
+```php
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="user")
+ */
+```
+
+**@ORM\Entity ** - identyfikuje klasę User jako encję
+**@ORM\Table(name="user")** - wskazuje nazwę tabeli, w której przechowywane są dane encji.
+
+Następnie definiujemy atrybuty encji, w tym przypadku wszystkie odpowiadają kolumnom tabeli *user*.
+
+```php
+/**
+ * @ORM\Id
+ * @ORM\GeneratedValue
+ * @ORM\Column(name="user_id", type="integer")
+ */
+``` 
+**@ORM\Id** - identyfikuje pole jako identyfikator encji.
+
+**@ORM\GeneratedValue** - informuje Doctrine, że pole to ma ustawiony parametr *auto_increment* w naszej bazie.
+
+**@ORM\Column(name="user_id", type="integer")** - odpowiada za wskazanie kolumny w tabeli user dla atrybutu $id czyli user_id i dodatkowo informuje, że kolumna jest typu int (Doctrine automatycznie wykona rzutowanie dla tej kolumny).
+Domyślnie wszystkie atrybuty są typu tekstowego *type="string"*. Deklarowanie typów pól po stronie encji nie jest wymagane, jednak zachęcam do tego, ponieważ ułatwia to identyfikowanie błędów już po stronie PHP.
 
 Moduły
 ======
