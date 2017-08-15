@@ -4,7 +4,7 @@ Spis treści:
 [TOC]
 
 ##### Spis treści
-[Obsługa bazy danych korzystając z Doctrine](DOCTRINE)  
+[Obsługa bazy danych korzystając z Doctrine](doctrine.md)  
 [Emphasis](#emphasis)  
 ...snip...    
 <a name="headers"/>
