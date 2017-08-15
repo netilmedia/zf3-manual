@@ -442,7 +442,8 @@ W naszej encji użyliśmy następujących adnotacji:
  */
 ```
 
-**@ORM\Entity ** - identyfikuje klasę User jako encję
+**@ORM\Entity ** - identyfikuje klasę User jako encję.
+
 **@ORM\Table(name="user")** - wskazuje nazwę tabeli, w której przechowywane są dane encji.
 
 Następnie definiujemy atrybuty encji, w tym przypadku wszystkie odpowiadają kolumnom tabeli *user*.
