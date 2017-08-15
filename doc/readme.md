@@ -2,6 +2,13 @@ Spis treści:
 
 [TOC]
 
+##### Spis treści
+[Headers](#headers)  
+[Emphasis](#emphasis)  
+...snip...    
+<a name="headers"/>
+## Headers
+
 Kontroler
 =
 
