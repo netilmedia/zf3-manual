@@ -49,16 +49,16 @@ Plik widoku obsługujący wyświetlenie danych produktu mógłby wyglądać nast
 
 ```php
 <html>
-<title><?php $this->product->getName() ?> - sklep example.com</title>
-<body>
-<h1><?php echo $this->product->getName(); ?></h1>
-<p><?php echo $this->product->getDescription(); ?></p>
-<dl>
-<dt>Cena</dt>
-<dd><?php echo number_format($this->product->getPrice(), 2, ',' ' '); ?>
-</dl>
-<button>dodaj do koszyka</button>
-</body>
+    <title><?php $this->product->getName() ?> - sklep example.com</title>
+    <body>
+        <h1><?php echo $this->product->getName(); ?></h1>
+        <p><?php echo $this->product->getDescription(); ?></p>
+        <dl>
+            <dt>Cena</dt>
+            <dd><?php echo number_format($this->product->getPrice(), 2, ',' ' '); ?>
+        </dl>
+        <button>dodaj do koszyka</button>
+    </body>
 </html>
 ```
 
