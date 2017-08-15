@@ -346,7 +346,7 @@ $submit = $form->get('submit')
         <?php echo $this->formElement($username); // wyświetlamy pole "username" ?>
     </div>
     <div class="form-group">
-        <?php echo $this->formRow($password); // wyświetlamy etykietę i pole korzystając z formRow ?>
+        <?php echo $this->formRow($password); // wyświetlamy etykietę i pole "password" korzystając z formRow ?>
     </div> 
     <?php echo $this->formElement($submit); ?>
     
