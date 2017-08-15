@@ -71,7 +71,7 @@ Dodanie nowego kontrolera
 
 Poniższe przykłady pokazują jak zbudować kontroler użytkownika *(UserController)*
 
-Dodanie fabryki i aliasu w pliku /module/Application/config/module.config.php
+Dodanie fabryki i aliasu w pliku */module/Application/config/module.config.php*
 
 ```php
 return [
@@ -131,7 +131,7 @@ Połączenie kontrolera z widokiem
 ---------------------------------
 
 Domyślnie kontroler zwraca powiązany z nim widok np. 
-indexAction zwraca widok *view/Application/user/index.phtml*
+indexAction zwraca widok */view/Application/user/index.phtml*
 
 W celu przekazania do niego parametru w akcji zwracamy tablicę:
 
@@ -231,14 +231,7 @@ Definiowanie formularza
 
 W poniższych przykładach stworzymy formularz rejestracji użytkownika.
 
-Tworzymy plik *UserForm.php* w katalogu:
-
-```
-/module
-    /Application
-        /src
-            /Form
-```
+Tworzymy plik */Application/src/Form/UserForm.php* w katalogu:
 
 ```php
 <?php
@@ -371,11 +364,74 @@ Powyższy przykład wygeneruje kod HTML:
 </div><!-- end .container -->
 ```
 
+Encje
+======
+Dodanie pliku */Application/src/Entity/User.php*
+
+```php
+// User.php
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="user")
+ */
+class User {
+
+    /**
+     * @ORM\Id;
+     * @ORM\GeneratedValue
+     * @ORM\Column(name="user_id", type="integer")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(name="username")
+     */
+    protected $username;
+
+    /**
+     * @ORM\Column(name="password")
+     */
+    protected $password;
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function getUsername() {
+        return $this->username;
+    }
+
+    public function setUsername($username) {
+        $this->username;
+        return $this;
+    }
+
+    public function getPassword($password) {
+        return $this->password;
+    }
+
+    public function setPassword($password) {
+        $this->password = $password;
+        return $this;
+    }
+
+}
+```
+
 Moduły
-=
+======
 
 Aktualizacja Modułu
--------------------
+------
  1. Pobranie katalogu modułu
  2. Pobranie pliku /config/modules.config.php i / modules.acl.roles.php
  3. Pobranie /composer.json
@@ -388,8 +444,7 @@ Aktualizacja Modułu
 
 
 Dodatek A: Nowości PHP
-=====================
-
+======
 **::class** - jest to specjalna stała klasy, której wartością jest nazwa klasy z całą przestrzenią nazw np.  
 ```php
 echo IndexController::class
