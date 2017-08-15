@@ -456,7 +456,7 @@ Następnie definiujemy atrybuty encji, w tym przypadku wszystkie odpowiadają ko
 ``` 
 **@ORM\Id** - identyfikuje pole jako identyfikator encji.
 
-**@ORM\GeneratedValue** - informuje Doctrine, że pole to ma ustawiony parametr *auto_increment* w naszej bazie.
+**@ORM\GeneratedValue** - informuje Doctrine o ustawionym parametrze *auto_increment* dla danej kolumny.
 
 **@ORM\Column(name="user_id", type="integer")** - odpowiada za wskazanie kolumny w tabeli user dla atrybutu $id czyli user_id i dodatkowo informuje, że kolumna jest typu int (Doctrine automatycznie wykona rzutowanie dla tej kolumny).
 Domyślnie wszystkie atrybuty są typu tekstowego *type="string"*. Deklarowanie typów pól po stronie encji nie jest wymagane, jednak zachęcam do tego, ponieważ ułatwia to identyfikowanie błędów już po stronie PHP.
