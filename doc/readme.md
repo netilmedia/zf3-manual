@@ -1,13 +1,13 @@
 Spis treści:
 
+
 [TOC]
 
 ##### Spis treści
-[Headers](#headers)  
+[Obsługa bazy danych korzystając z Doctrine](DOCTRINE)  
 [Emphasis](#emphasis)  
 ...snip...    
 <a name="headers"/>
-## Headers
 
 Kontroler
 =
