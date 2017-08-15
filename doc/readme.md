@@ -440,7 +440,7 @@ Filtry
 - FilterChain
 - StaticFilter
 
- #3 Dodawanie filtrów do formularza
+### Dodawanie filtrów do formularza
  
 
 Model
