@@ -45,6 +45,13 @@ $users = $this->em->getRepository(User::class)
 // ORDER BY id DESC LIMIT 0, 10
 ```
 
+Analogicznie do metody *findBy* możemy użyć *findOneBy()* w celu pobrania tylko jednego rekordu. Oczywiście w takim wypadku przekazujemy tylko 2 pierwsze argumenty.
+
+```php
+$user = $this->em->getRepository(User::class)
+                ->findOneBy($where, $order);
+```
+
 Dodawanie nowych rekordów
 ------
 
