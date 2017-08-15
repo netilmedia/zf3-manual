@@ -222,12 +222,12 @@ echo $this->testView;
 ```
 
 Korzystanie z modułu Zend\Form
-=
+======
 
 Moduł Zend\Form daje możliwość zdefiniowania pól formularza, dodanie do nich filtrów i walidacji.
 
 Definiowanie formularza
--
+------
 
 W poniższych przykładach stworzymy formularz rejestracji użytkownika.
 
@@ -388,18 +388,12 @@ public function createAction() {
         $form->setData($data);
         
         if ($form->isValid()) {
-            // Przekazujemy dane z formularza
-            // do usługi "userManager", które w przypadku
-            // pomyślnego dodania do bazy zwróci
-            // obiekt $user (encję User);
-            
-            $user = $this->userManager->create($data);
-            // wyświetlamy id dodanego użytkownika    
-            echo $user->getId();
+			
+			// dane są prawidłowe...            
             
         } else {
             // w przypadku błędnie wypełnionego formularza
-            // wyświetlamy błędy na ekran dla celów przykładu
+            // wyświetlamy wynik na ekran dla celów przykładu
             var_dump($form->getMessages());
         }
     }    
@@ -410,6 +404,44 @@ public function createAction() {
 }
 
 ```
+
+Obsługa bazy danych korzystając z Doctrine
+======
+
+Dodawanie nowych rekordów
+------
+
+```php
+<?php
+// UserManager.php
+namespace Applcation\Service;
+
+use Application\Entity\User;
+
+class UserManager {
+
+    protected $entityManager;    
+
+    public function __construct($entityManager) {
+        $this->entityManager = $entityManager;
+    }
+
+    /**
+     * @return User
+     */
+    public function create(array $data) {
+    
+        $user = new User();
+        $hydrator->hydrate($data, $user);
+
+        $this->entityManager->persist($user)
+                ->flush();
+
+        return $user;
+    }
+}
+```
+
 
 Model
 ======
@@ -475,7 +507,6 @@ class User {
         $this->password = $password;
         return $this;
     }
-
 }
 ```
 
