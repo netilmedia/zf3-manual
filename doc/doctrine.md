@@ -72,7 +72,7 @@ $users = $this->em->getRepository(User::class)
 
 Jak widzimy na powyższym przykładzie możemy wywołać metodę *findBy\[nazwaAtrybutuEncji\]()* i *findOneBy\[nazwaAtrybutuEncji\]()*
 
-Metody te obsługiwane są poprzez wywołanie metody *__call()* i zamieniane na wcześniej przedstawione metody *findBy()* i *findOneBy()*, więc możemy do nich przekazać dodatkowe argumenty np. *$orderBy*. 
+Metody te obsługiwane są poprzez wywołanie magicznej metody *__call()* i zamianę na wcześniej przedstawione metody *findBy()* i *findOneBy()*, więc możemy do nich przekazać dodatkowe argumenty np. *$orderBy*. 
 
 ```php
 // wywołanie poniższej metody
