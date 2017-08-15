@@ -274,7 +274,7 @@ class UserForm extends Form { // extends Zend\Form\Form
 ```
 
 Tak utworzony formularz możemy przekazać do widoku w naszym kontrolerze:
-```
+```php
 <?php
 // UserController.php
 namespace Application/Controller;
