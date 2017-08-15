@@ -52,6 +52,38 @@ $user = $this->em->getRepository(User::class)
                 ->findOneBy($where, $order);
 ```
 
+### Magiczne pobieranie danych dzięki "magic finders"
+
+Magic finders to dynamiczne metody służące do pobierania danych używając jako kryteriów wyszukiwania atrybutów encji.
+
+Pobieranie jednego użytkownika na podstawie wartości pola *username* 
+
+```php
+$user = $this->em->getRepository(User::class)
+        ->findOneByUsername('jan');
+```
+
+Pobieranie wielu użytkowników na podstawie pola *password*
+
+```php
+$users = $this->em->getRepository(User::class)
+        ->findByPassword('tajne_haslo');
+```
+
+Jak widzimy na powyższym przykładzie możemy wywołać metodę *findBy[nazwaAtrybutuEncji]()* i *findOneBy[nazwaAtrybutuEncji]()*
+
+Metody te obsługiwane są poprzez wywołanie metody *__call()* i zamieniane na wcześniej przedstawione metody *findBy()* i *findOneBy()*, więc możemy do nich przekazać dodatkowe argumenty np. *$orderBy*. 
+
+```php
+// wywołanie poniższej metody
+$this->em->findOneByUsername('jan', ['id' => 'DESC']);
+// w rzeczywistości spowoduje wykorzystanie:
+$this->em->findOneBy(
+    ['username' => 'jan'], // wyszukiwanie po 'username'
+    ['id' => 'DESC'] // sortowanie po 'id'
+);
+```
+
 Dodawanie nowych rekordów
 ------
 
