@@ -364,7 +364,7 @@ Powyższy przykład wygeneruje kod HTML:
 </div><!-- end .container -->
 ```
 
-Encje
+Model
 ======
 
 Wracając do wzorca MVC mamy już nasz kontroler ( **C** ontroller) i widok ( **V** iew). Nadszedł więc czas na nasz model ( **M** odel).
@@ -432,7 +432,8 @@ class User {
 }
 ```
 
-Doctrine używa adnotacji (Annotations), czyli specjalnych komentarzy w celu zinterpretowania konfiguracji encji.
+Doctrine używa adnotacji (annotations), czyli specjalnych komentarzy w celu mapowania klasy encji z danymi tabeli.
+
 W naszej encji użyliśmy następujących adnotacji:
 
 ```php
