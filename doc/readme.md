@@ -412,6 +412,37 @@ public function createAction() {
 
 ```
 
+Filtry
+------
+
+- ToBoolean
+- ToInt
+- Digits
+- ToNull
+- DateTimeFormatter
+- BaseName	
+- Dir
+- RealPath
+- Compress
+- Decompress
+- Encrypt
+- Decrypt
+- Inflector
+- PregReplace
+- StringToLower
+- StringToUpper
+- StringTrim
+- StripNewlines
+- HtmlEntities
+- StripTags
+- UriNormalize
+- Callback
+- FilterChain
+- StaticFilter
+
+ #3 Dodawanie filtrów do formularza
+ 
+
 Model
 ======
 
