@@ -5,11 +5,14 @@ Spis treści:
 Kontroler
 =
 
-Zgodnie z wzorcem [MVC](https://pl.wikipedia.org/wiki/Model-View-Controller) kontroler *(Controller)* łączy model *(Model)* z widokiem *(View)*. Najprościej mówiąc jeżeli użytkownik wpisuje adres:
+Wprowadzenie
+-
+
+Zgodnie z wzorcem [MVC](https://pl.wikipedia.org/wiki/Model-View-Controller) kontroler *(Controller)* obsługuje żądanie *(request)* łącząc przy tym model *(Model)* z widokiem *(View)*. Najprościej mówiąc jeżeli użytkownik wpisuje adres:
 ```
 www.example.com/application/test/akcja
 ```
- uruchamia w ten sposób kontroler **Test** *(TestController)*, który następnie pobiera potrzebne modele (np. produkt w sklepie) i przekazuje do zwracanego widoku.
+ uruchamia w ten sposób kontroler **Test** *(TestController)*, który następnie pobiera potrzebne modele (np. produkt w sklepie) i przekazuje do zwracanego widoku (np. generuje kod HTML, XML czy JSON).
 
 Przykład wywołania adresu sklepu:
 
@@ -19,7 +22,7 @@ www.example.com/sklep/produkt/widok/id/1
 
 Uruchamia kontroler **produkt** *(ProductController)* a następnie akcję kontrolera **widok** *(viewAction)*. Akcja pobiera wartość parametru **id**, następnie pobiera produkt o takim id i przekazuje do widoku.
 
-Jak to wygląda w ZF?
+**Jak to wygląda w ZF?**
 
 ```php
 <?php
@@ -42,10 +45,33 @@ class ProductController extend AbstractControllerAction {
 }
 ```
 
+Plik widoku obsługujący wyświetlenie danych produktu mógłby wyglądać następująco:
+
+```php
+<html>
+<title><?php $this->product->getName() ?> - sklep example.com</title>
+<body>
+<h1><?php echo $this->product->getName(); ?></h1>
+<p><?php echo $this->product->getDescription(); ?></p>
+<dl>
+<dt>Cena</dt>
+<dd><?php echo number_format($this->product->getPrice(), 2, ',' ' '); ?>
+</dl>
+<button>dodaj do koszyka</button>
+</body>
+</html>
+```
+
+Jak widać na powyższym przykładzie w pliku widoku możemy odwołać się do zmiennej zawierającej obiekt *$product* przekazanej w kontrolerze.
+
+ZF w całości obsługuje wzorzec MVC, po stronie programisty pozostaje jedynie obsługa wygenerowania odpowiedniej odpowiedzi.
+
 Dodanie nowego kontrolera
 -
 
-Dodanie fabryki i aliasu w pliku /module/*NazwaModułu*/config/module.config.php
+Poniższe przykłady pokazują jak zbudować kontroler użytkownika *(UserController)*
+
+Dodanie fabryki i aliasu w pliku /module/Application/config/module.config.php
 
 ```php
 return [
@@ -53,12 +79,12 @@ return [
     ['controllers' => [
         'factories' => [
             //...
-            Controller\NazwaController::class => Controller\Factory\NazwaControllerFactory::class,
+            Controller\UserController::class => Controller\Factory\UserControllerFactory::class,
         ],
         'aliases' => [
             //...
-            // nazwa aliasu (example.com/module/nazwa-aliasu
-            'nazwa-aliasu' => Controller\NazwaController::class,
+            // nazwa aliasu (example.com/application/user
+            'user' => Controller\NazwaController::class,
         ]
     ]
 //...
@@ -67,7 +93,7 @@ return [
 
   
 
-Dodanie pliku kontrolera *TestController.php* w katalogu
+Dodanie pliku kontrolera *UserController.php* w katalogu
 
 ```
 /module
@@ -77,11 +103,13 @@ Dodanie pliku kontrolera *TestController.php* w katalogu
 ```
 
 ```php
-// plik TestController.php
+// plik UserController.php
 <?php
 namespace Application\Controller;
 
-class TestController extends AbstractControllerAction {
+use Zend\Mvc\Controller\AbstractActionController;
+
+class UserController extends AbstractActionController {
 
     public function indexAction() {
         
@@ -89,7 +117,7 @@ class TestController extends AbstractControllerAction {
 }
 ```
 
-Dodanie pliku fabryki kontrolera *TestControllerFactory.php* w katalogu
+Dodanie pliku fabryki kontrolera *UserControllerFactory.php* w katalogu
 
 ```
 /module
@@ -103,16 +131,17 @@ Połączenie kontrolera z widokiem
 ---------------------------------
 
 Domyślnie kontroler zwraca powiązany z nim widok np. 
-indexAction zwraca widok *view/Application/index/index.phtml*
+indexAction zwraca widok *view/Application/user/index.phtml*
 
 W celu przekazania do niego parametru w akcji zwracamy tablicę:
 
 
 ```php
-//IndexController.php
-namespace Application\Controller;
-	
-class IndexController extends AbstractControllerAction {
+//UserController.php
+<?php
+// tutaj nagłówek z poprzedniego przykładu
+
+class UserController extends AbstractActionController {
 
     public function indexAction() {
         $wartosc = 'test';
@@ -127,11 +156,15 @@ class IndexController extends AbstractControllerAction {
 Ten sam efekt uzyskamy poprzez zwrócenie obiektu tak jak robi to klasa AbstractControllerAction:
 
 ```php
-namespace Application\Controller;
-//potrzebne jedynie w przypadku użycia new ViewModel() w akcji
+<?php
+// UserController.php
+
+// ...
+
+// importujemy ViewModel
 use Zend\View\Model\ViewModel;
 
-class IndexController extends AbstractControllerAction {
+class UserController extends AbstractActionController {
 
     public function indexAction() {
         return new ViewModel([
@@ -164,7 +197,7 @@ Przekazanie widoku jednej akcji do widoku drugiej:
 
 ```php
 public function indexAction() {
-    $testView = $this->forward()->dispatch(IndexController::class, [
+    $testView = $this->forward()->dispatch(UserController::class, [
         'action => 'test'
     ]);
     
@@ -184,7 +217,7 @@ public function testAction() {
 W widoku możemy się wtedy odwołać w następujący sposób:
 
 ```php
-// plik view/application/index/index.phtml
+// plik view/application/user/index.phtml
 echo $this->testView;
 ```
 
@@ -196,13 +229,97 @@ Moduł Zend\Form daje możliwość zdefiniowania pól formularza, dodanie do nic
 Definiowanie formularza
 -
 
-Tworzymy plik *TestForm.php* w katalogu:
+W poniższych przykładach stworzymy formularz rejestracji użytkownika.
+
+Tworzymy plik *UserForm.php* w katalogu:
 
 ```
 /module
     /Application
         /src
             /Form
+```
+
+```php
+<?php
+// UserForm.php
+
+namespace Application\Form;
+
+use Zend\Form\Form;
+
+class UserForm extends Form { // extends Zend\Form\Form
+    
+    public function __construct() {
+        
+        parent::__construct('user');
+
+        $this->init();
+    }
+
+    public function init() {
+        
+        $this->add([
+            'name' => 'username',
+            'type' => 'text',
+            'options' => [
+                'label' => 'Nazwa użytkownika'
+            ],
+            'attributes' => [
+                'placeholder' => 'Nazwa użytkownika'
+            ]
+        ]);
+    }
+}
+```
+
+Tak utworzony formularz możemy przekazać do widoku w naszym kontrolerze:
+```
+<?php
+// UserController.php
+namespace Application/Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+use Application\Form\UserForm;
+
+class UserController extends AbstractActionController {
+    
+    public function formAction() {
+        
+        $form = new UserForm();
+        // przekazujemy obiekt formularza do widoku
+        return [
+            'form' => $form
+        ];
+    }
+}
+```
+
+Tworzymy plik widoku w katalogu */module/Application/view/application/user/form.phtml*
+
+```php
+<?php
+// przekazujemy do lokalnej zmiennej $form referencje do
+// obiektu $this->form 
+$form = &$this->form;
+// wywołujemy metodą prepare() przed użyciem widoku
+$form->prepare();
+
+// pobieramy obiekt pola username
+// i dodajemy do niego atrybut class="form-control"
+$username = $form->get('username')
+            ->setAttribute('class', 'form-control');
+?>
+<div class="container">
+    <?php echo $this->form()->openTag($form); ?>
+    
+    <div class="form-group">
+        <?php echo $this->formLabel($username) ?>
+        <?php echo $this->formElement($username) ?>
+    </div>
+    
+    <?php echo $this->form()->closeTag($form); ?>
+</div><!-- end .container -->
 ```
 
 Moduły
