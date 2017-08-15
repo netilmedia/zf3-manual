@@ -47,7 +47,7 @@ class ProductController extend AbstractControllerAction {
 
 Plik widoku obsługujący wyświetlenie danych produktu mógłby wyglądać następująco:
 
-```php
+```html
 <html>
     <title><?php $this->product->getName() ?> - sklep example.com</title>
     <body>
