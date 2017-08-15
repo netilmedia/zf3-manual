@@ -259,6 +259,7 @@ class UserForm extends Form { // extends Zend\Form\Form
 
     public function init() {
         
+        // dodajemy pole tekstowe "nazwa użytkownika"
         $this->add([
             'name' => 'username',
             'type' => 'text',
@@ -267,6 +268,16 @@ class UserForm extends Form { // extends Zend\Form\Form
             ],
             'attributes' => [
                 'placeholder' => 'Nazwa użytkownika'
+            ]
+        ]);
+        
+        // dodajemy guzik
+        $this->add([
+            'name' => 'submit',
+            'type' => 'button',
+            'attributes' => [
+                'type' => 'submit',
+                'value' => 'Zarejestruj się'
             ]
         ]);
     }
@@ -302,21 +313,26 @@ Tworzymy plik widoku w katalogu */module/Application/view/application/user/form.
 // przekazujemy do lokalnej zmiennej $form referencje do
 // obiektu $this->form 
 $form = &$this->form;
-// wywołujemy metodą prepare() przed użyciem widoku
+// wywołujemy metodę prepare() przed użyciem widoku
 $form->prepare();
 
 // pobieramy obiekt pola username
 // i dodajemy do niego atrybut class="form-control"
 $username = $form->get('username')
             ->setAttribute('class', 'form-control');
+
+// pobieramy obiekt guzika submit
+$submit = $form->get('submit')
+            ->setAttribute('class', 'btn btn-primary');
 ?>
 <div class="container">
     <?php echo $this->form()->openTag($form); ?>
     
     <div class="form-group">
-        <?php echo $this->formLabel($username) ?>
-        <?php echo $this->formElement($username) ?>
+        <?php echo $this->formLabel($username); // wyświetlamy etykietę pola username ?>
+        <?php echo $this->formElement($username); // wyświetlamy pole username ?>
     </div>
+    <?php echo $this->formElement($submit); ?>
     
     <?php echo $this->form()->closeTag($form); ?>
 </div><!-- end .container -->
