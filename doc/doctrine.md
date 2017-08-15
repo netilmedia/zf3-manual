@@ -24,7 +24,7 @@ $users = $this->em->getRepository(User::class)->findAll();
 // SELECT * FROM user
 ```
 Metoda *findAll()* nie przyjmuje żadnych argumentów, więc nie możemy sortować lub wyszukiwać danych. Aby to zrobić musimy użyć metody *findBy()*:
-```
+```php
 $where = [
     'first_name' => 'Jan'
 ];
