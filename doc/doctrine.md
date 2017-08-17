@@ -125,13 +125,13 @@ Typy
 ------
 
 **liczby**
-| typ | PHP |
-|-|-|
-|smallint|integer|
-|integer|integer|
-|bigint|string|
-|decimal|string|
-|float|float/double|
+typ | PHP
+---|---
+smallint|integer
+integer|integer
+bigint|string
+decimal|string
+float|float/double
 
 **ciągi znaków**
 
