@@ -138,36 +138,40 @@ float|float/double
 
 typ|PHP
 ---|---
-|string|string|
-|text|string|
+string|string
+text|string
 
 **bitowe**
-| typ| PHP|
-|-|-|
-|boolean|boolean|
+
+typ|PHP
+---|---
+boolean|boolean
 
 **data i czas**
 
-| typ| PHP|
-|-|-|
-|datetime|\DateTime|
-|time|\DateTime|
+typ| PHP
+---|---
+datetime|\DateTime
+time|\DateTime
 
 **tablice**
-|typ|PHP|
-|-|-|
-|array|array|
-|simple_array|array|
+
+typ|PHP
+---|---
+array|array
+simple_array|array
 
 **json**
-|typ|PHP|
-|-|-|
-|json|array (json_decode)|
+
+typ|PHP
+---|---
+json|array (json_decode)
 
 **obiekty**
-|typ|PHP|
-|-|-|
-|object|object|
+
+|yp|PHP
+---|---
+object|object
 
 
 
