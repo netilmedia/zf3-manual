@@ -56,6 +56,9 @@ $user = $this->em->getRepository(User::class)
 
 Magic finders to dynamiczne metody służące do pobierania danych używając jako kryteriów wyszukiwania atrybutów encji.
 
+**Uwaga**
+Ze względów wydajnościowych nie zaleca się nadmiernego używania tego typu metod.
+
 Pobieranie jednego użytkownika na podstawie wartości pola *username* 
 
 ```php
@@ -84,6 +87,52 @@ $this->em->findOneBy(
 );
 ```
 
+### QueryBuilder
+
+W celu budowania bardziej złożonych zapytań Doctrine udostępnia obiekt QueryBuilder, która posiada wiele metod umożliwiających dynamiczne budowanie zapytań korzystając z składni DQL (Doctrine Query Language).
+
+#### Budowanie zapytań korzystając z metod wysokiego poziomu:
+
+```php
+<?php
+
+$qb = $this->entityManager->createQueryBuilder();
+
+$qb->select('u')
+   ->from(User::class, 'u')
+   ->where('u.id = ?1')
+   ->setParameter(1, 1)
+   ->orderBy('u.username', 'ASC');
+// SELECT u.*
+// FROM user AS u
+// WHERE u.user_id = 1
+// ORDER BY u.username ASC
+```
+
+Posiadając zdefiniowane zapytanie mamy możliwość pobrania i zwrócenia wyniku na różne sposoby.
+
+(1) Zwracając encję/kolekcję encji:
+```php
+$user = $qb->getQuery()->getResult();
+```
+
+(2) Zwracając wartość w postaci tablicy:
+```php
+$user = $qb->getScalarResult();
+```
+
+(3) Zwracając pojedynczą wartość:
+
+```php
+$qb->select('MAX(u.user_id)')
+   ->from('User', 'u');
+
+// SELECT MAX(u.user_id) FROM user AS u
+
+echo $qb->getQuery()->getSingleScalarResult();
+// zwróci np. 5
+```
+
 Dodawanie nowych rekordów
 ------
 
@@ -96,6 +145,9 @@ use Application\Entity\User;
 
 class UserManager {
 
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
     protected $entityManager;    
 
     public function __construct($entityManager) {
