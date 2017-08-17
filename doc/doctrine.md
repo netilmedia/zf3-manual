@@ -126,7 +126,8 @@ Typy
 
 Poniższe zestawienie prezentuje sposób w jaki Doctrine rzutuje ustawiony typ kolumny na odpowiadający mu typ w PHP.
 
-Szczegółowe informacje i przykład pisania własnych typów znajdziesz na stronie: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/types.html
+Szczegółowe informacje i przykład definiowania własnych typów znajdziesz na stronie: 
+http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/types.html
 
 ### liczby
 
