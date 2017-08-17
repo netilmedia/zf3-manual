@@ -125,6 +125,7 @@ Typy
 ------
 
 **liczby**
+
 typ|PHP
 ---|---
 smallint|integer
