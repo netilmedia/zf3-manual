@@ -124,6 +124,10 @@ Definiowanie encji
 Typy
 ------
 
+Poniższe zestawienie prezentuje sposób w jaki Doctrine rzutuje ustawiony typ kolumny na odpowiadający mu typ w PHP.
+
+Szczegółowe informacje i przykład pisania własnych typów znajdziesz na stronie: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/types.html
+
 ### liczby
 
 typ|PHP
@@ -172,6 +176,17 @@ json|array (json_decode)
 typ|PHP
 ---|---
 object|object
+
+Relacje
+------
+
+### OneToOne
+
+```php
+/**
+ * 
+ */
+```
 
 
 
