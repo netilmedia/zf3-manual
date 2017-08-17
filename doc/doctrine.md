@@ -124,7 +124,7 @@ Definiowanie encji
 Typy
 ------
 
-**liczby**
+###**liczby**
 
 typ|PHP
 ---|---
@@ -134,40 +134,40 @@ bigint|string
 decimal|string
 float|float/double
 
-**ciągi znaków**
+###**ciągi znaków**
 
 typ|PHP
 ---|---
 string|string
 text|string
 
-**bitowe**
+###**bitowe**
 
 typ|PHP
 ---|---
 boolean|boolean
 
-**data i czas**
+###**data i czas**
 
 typ| PHP
 ---|---
 datetime|\DateTime
 time|\DateTime
 
-**tablice**
+###**tablice**
 
 typ|PHP
 ---|---
 array|array
 simple_array|array
 
-**json**
+###**json**
 
 typ|PHP
 ---|---
 json|array (json_decode)
 
-**obiekty**
+###**obiekty**
 
 |yp|PHP
 ---|---
