@@ -117,3 +117,56 @@ class UserManager {
     }
 }
 ```
+
+Definiowanie encji
+======
+
+Typy
+------
+
+**liczby**
+| typ | PHP |
+|-|-|
+|smallint|integer|
+|integer|integer|
+|bigint|string|
+|decimal|string|
+|float|float/double|
+
+**ciągi znaków**
+
+| typ | PHP |
+|-|-|
+|string|string|
+|text|string|
+
+**bitowe**
+| typ| PHP|
+|-|-|
+|boolean|boolean|
+
+**data i czas**
+
+| typ| PHP|
+|-|-|
+|datetime|\DateTime|
+|time|\DateTime|
+
+**tablice**
+|typ|PHP|
+|-|-|
+|array|array|
+|simple_array|array|
+
+**json**
+|typ|PHP|
+|-|-|
+|json|array (json_decode)|
+
+**obiekty**
+|typ|PHP|
+|-|-|
+|object|object|
+
+
+
