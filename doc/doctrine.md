@@ -108,6 +108,8 @@ class UserManager {
     public function create(array $data) {
     
         $user = new User();
+        
+        $hydrator = new \DoctrineModule\Stdlib\Hydrator\DoctrineObject($this->entityManager);
         $hydrator->hydrate($data, $user);
 
         $this->entityManager->persist($user)
