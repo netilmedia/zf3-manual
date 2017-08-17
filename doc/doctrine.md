@@ -125,7 +125,7 @@ Typy
 ------
 
 **liczby**
-typ | PHP
+typ|PHP
 ---|---
 smallint|integer
 integer|integer
@@ -135,8 +135,8 @@ float|float/double
 
 **ciągi znaków**
 
-| typ | PHP |
-|-|-|
+typ|PHP
+---|---
 |string|string|
 |text|string|
 
